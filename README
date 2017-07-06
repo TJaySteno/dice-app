@@ -1,1 +1,5 @@
 Dice project
+
+index.html runs app.js
+
+Enter action, number of dice, and number of sides for rolls. The page will previous rolls up to 5.
