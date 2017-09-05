@@ -1,30 +1,84 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<title>Cya nerds!</title>
-</head>
-<header>
-	<h1>D&D Dice!</h1>
-</header>
-<body>
-	<form>
-		<fieldset>
-			<legend>Roll information:</legend>
-			Action:<br>
-			<input type="text" name="action" id="action"><br>
-			Number of dice:<br>
-			<input type="text" name="number" id="number"><br>
-			Sides:<br>
-			<input type="text" name="sides" id="sides"><br>
-			<br>
-			<input type="submit" value="Roll!">
-		</fieldset>
-	</form>
-	<h2></h2>
-	<script src="dice.js"></script>
-	<script src="statRoll.js"></script>
-</body>
-<footer>
-	Trent's little thing! &copy;2017
-</footer>
+	<head>
+		<title>Cya nerds!</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<header>
+		<h1>D&D Dice!</h1>
+	</header>
+	<body>
+		<form>
+			<fieldset>
+				<legend>Roll information:</legend>
+				Action:<br>
+				<input type="text" id="action1" autofocus="autofocus"><br>
+				Number of dice:<br>
+				<input type="text" id="number1"><br>
+				Number of sides:<br>
+				<input type="text" id="sides1"><br>
+				<button onClick="rollButton(); return false;">Roll!</button>
+			</fieldset>
+			<fieldset>
+				<legend>Secondary damage:</legend>
+				Damage source:<br>
+				<input type="text" id="action2"><br>
+				Number of dice:<br>
+				<input type="text" id="number2"><br>
+				Sides:<br>
+				<input type="text" id="sides2"><br>
+				<button onClick="rollButton(); return false;">Roll!</button>
+			</fieldset>
+			<fieldset>
+				<legend>Tertiary damage:</legend>
+				Damage source:<br>
+				<input type="text" id="action3"><br>
+				Number of dice:<br>
+				<input type="text" id="number3"><br>
+				Sides:<br>
+				<input type="text" id="sides3"><br>
+				<button onclick="rollButton(); return false;">Roll!</button>
+			</fieldset>
+		</form>
+		<button id="test" onclick="print(testRolls())">Test</button>
+		<h2></h2>
+		<div id="background">
+			<div id="result"></div>
+			<div id="main">
+				<div id="first-rows">
+					<button class="del-bg" id="delete">C</button>
+						<button value="%" class="btn-style operator opera-bg fall-back">%</button>
+						<button value="+" class="btn-style opera-bg value align operator">+</button>
+				</div>
+				<div class="rows">
+					<button value="7" class="btn-style num-bg num first-child">7</button>
+					<button value="8" class="btn-style num-bg num">8</button>
+					<button value="9" class="btn-style num-bg num">9</button>
+					<button value="-" class="btn-style opera-bg operator">-</button>
+				</div>
+				<div class="rows">
+					<button value="4" class="btn-style num-bg num first-child">4</button>
+					<button value="5" class="btn-style num-bg num">5</button>
+					<button value="6" class="btn-style num-bg num">6</button>
+					<button value="*" class="btn-style opera-bg operator">x</button>
+				</div> 
+				<div class="rows">
+					 <button value="1" class="btn-style num-bg num first-child">1</button>
+					 <button value="2" class="btn-style num-bg num">2</button>
+					 <button value="3" class="btn-style num-bg num">3</button>
+					 <button value="/" class="btn-style opera-bg operator">/</button>
+				</div>
+				<div class="rows">
+					 <button value="0" class="num-bg zero" id="delete">0</button>
+					 <button value="." class="btn-style num-bg period fall-back">.</button>
+					 <button value="=" id="eqn-bg" class="eqn align">=</button>
+				</div>
+			</div>
+		</div>
+		<script src="app.js"></script>
+	</body>
+	<footer>
+		Trent's little thing! &copy;2017
+	</footer>
 </html>
