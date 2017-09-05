@@ -1,6 +1,6 @@
 My Dice App
 
-This app was created as a tool to use for use with tabletop roleplaying games. It will take an action, a number of dice, and the number of sides, perform the roll and print to the page. If needed it can calculate damage from up to three sources simultaneously as shown below
+This app was created as a tool to use for use with tabletop roleplaying games. It will take an action, a number of dice, and the number of sides, perform the roll and print to the page. If needed it can calculate damage from up to three sources simultaneously as shown below.
 
 (Attack 1d20): 19 total ( 19 ) - 14:50:31
 
@@ -13,3 +13,5 @@ Next steps:
 
 Open issues: 
 	When a field is left blank, should throw an Error. Instead it displays an empty string. (): 0 total ( ) - 15:0:0
+	
+HTML and CSS for the calculator written by Mawuli Kufogbe. Source: https://codepen.io/ckm100/pen/dPLyjZ
