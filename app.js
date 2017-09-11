@@ -1,50 +1,75 @@
 //HTML elements
 const h2 = document.querySelector('h2');
-const fieldsets = document.querySelectorAll('fieldset');
 
-const inputs = [{},{},{}];
-for (let i = 0; i < fieldsets.length; i++) {
-	inputs[i].actionElement = fieldsets[i].firstElementChild.nextElementSibling.nextElementSibling;
-	inputs[i].numberOfDiceElement = inputs[i].actionElement.nextElementSibling.nextElementSibling.nextElementSibling;
-	inputs[i].dieSidesElement = inputs[i].numberOfDiceElement.nextElementSibling.nextElementSibling.nextElementSibling;
+const rollInfo = Array.from(document.querySelectorAll('fieldset'));
+const partyTreasure = rollInfo.pop();
+
+//Find HTML elements for roll fields
+const rollInputs = [{},{},{}];
+for (let i = 0; i < rollInfo.length; i++) {
+	rollInputs[i].actionElement = rollInfo[i].firstElementChild.nextElementSibling.nextElementSibling;
+	rollInputs[i].numberOfDiceElement = rollInputs[i].actionElement.nextElementSibling.nextElementSibling.nextElementSibling;
+	rollInputs[i].dieSidesElement = rollInputs[i].numberOfDiceElement.nextElementSibling.nextElementSibling.nextElementSibling;
 }
 
-//Store previous rolls
+//Find HTML element for treasure fields
+const treasureInputs = {};
+treasureInputs.PP = partyTreasure.firstElementChild.nextElementSibling;
+treasureInputs.GP = treasureInputs.PP.nextElementSibling;
+treasureInputs.EP = treasureInputs.GP.nextElementSibling;
+treasureInputs.SP = treasureInputs.EP.nextElementSibling;
+treasureInputs.CP = treasureInputs.SP.nextElementSibling;
+treasureInputs.items = treasureInputs.CP.nextElementSibling.nextElementSibling.nextElementSibling;
+
+//Array in which to store rolls
 const rolls = [];
 
 //Basic functions
 const d = (d) => Math.floor(Math.random() * d ) + 1;
-const print = (message) => h2.innerHTML = message;
 const log = (message) => console.log(message);
 
-function clearInputs() {
-	for (let i = 1; i < 3; i++) {
-		inputs[i].actionElement.value = '';
-		inputs[i].numberOfDiceElement.value = '';
-		inputs[i].dieSidesElement.value = '';
-	}
-	inputs[0].actionElement.focus();
+const print = (message) => {
+	h2.innerHTML = message;
+	rollInputs[0].actionElement.focus();
 }
 
-//App functions
+function clearRolls() {
+	for (let i = 1; i < 3; i++) {
+		rollInputs[i].actionElement.value = '';
+		rollInputs[i].numberOfDiceElement.value = '';
+		rollInputs[i].dieSidesElement.value = '';
+	}
+}
+
+function clearTreasureInputs() {
+	treasureInputs.PP.value = '';
+	treasureInputs.GP.value = '';
+	treasureInputs.EP.value = '';
+	treasureInputs.SP.value = '';
+	treasureInputs.CP.value = '';
+	treasureInputs.items.value = '';
+	
+}
+
+//Dice rolling functions
 function retrieveInfo() {
 	const rollInfo = [];
-	for (let i = 0; i < inputs.length; i++) {
-		if (inputs[i].actionElement.value === null) {
+	for (let i = 0; i < rollInputs.length; i++) {
+		if (rollInputs[i].actionElement.value === null) {
 			throw Error('Please enter a description of your action');
-		} else if (isNaN(inputs[i].numberOfDiceElement.value) || isNaN(inputs[i].dieSidesElement.value)) {
+		} else if (isNaN(rollInputs[i].numberOfDiceElement.value) || isNaN(rollInputs[i].dieSidesElement.value)) {
 			throw Error('Please enter numbers for both number of dice and dice sides');
-		} else if (inputs[i].actionElement.value && inputs[i].numberOfDiceElement.value && inputs[i].dieSidesElement.value) {
+		} else if (rollInputs[i].actionElement.value && rollInputs[i].numberOfDiceElement.value && rollInputs[i].dieSidesElement.value) {
 			rollInfo[i] = {
-				action: inputs[i].actionElement.value,
-				numberOfDice: inputs[i].numberOfDiceElement.value,
-				dieSides: inputs[i].dieSidesElement.value
+				action: rollInputs[i].actionElement.value,
+				numberOfDice: rollInputs[i].numberOfDiceElement.value,
+				dieSides: rollInputs[i].dieSidesElement.value
 			}
 		} else {
 			break;
 		}
 	}
-	clearInputs();
+	clearRolls();
 	return rollInfo;
 }
 
@@ -102,7 +127,7 @@ function rollButton() {
 	let message = rollMessage(rollInfo);
 	message += addTime();
 	message = allRollsMessage(message);
-	print(message);
+	return message;
 }
 
 //Test Buttons
@@ -116,20 +141,23 @@ function testRolls() {
 		list.push(num);
 		filtered[num-1].push(num);
 	};
-	return `Test results for 9,999 rolls<p>${mean(sum)}<br>${median(list)}<br>${mode(filtered)}</p>`;
+	return `Test results for 9,999 rolls<p>${mean(sum, 9999).toFixed(4)} mean<br>${median(list)} median<br>${mode(filtered)}</p>`;
 }
 
-function mean(sum) { return `${(sum/9999).toFixed(4)} mean`; };
+//Return average of a sum of numbers
+const mean = (sum, num) => (sum/num);
 
-function median(list) {
-	list.sort(function(a, b) { return a - b; });
-	return `${list[5000]} median`;
+//Return middle of a list
+const median = (list) => {
+	list.sort((a, b) => a - b);
+	const median = Math.ceil(list.length/2);
+	return list[median];
 }
 
 function mode(filtered) {
 	let mode;
 	let frequency = 0;
-	for (let i = 0; i < 20; i++) {
+	for (let i = 0; i < filtered.length; i++) {
 		if (filtered[i].length > frequency) {
 			mode = [i+1]; 
 			frequency = filtered[i].length;
@@ -144,3 +172,96 @@ function mode(filtered) {
 	message += `mode, with a frequency of ${frequency}`;
 	return message;
 }
+
+//Treasure	
+let treasure;
+let previousTreasure;
+
+if (localStorage.treasure) {
+	//Parse existing treasure or start a new set
+	treasure = JSON.parse(localStorage.treasure);
+} else {
+	treasure = {
+		coins: 0,
+		items: []
+	};
+}
+
+if (localStorage.previousTreasure) {
+	//Parse existing treasure or start a new set
+	previousTreasure = JSON.parse(localStorage.previousTreasure);
+}
+
+function addToStash() {
+	//Retrieve and store inputs, add to localStorage, print
+	if (treasureInputs.PP.value) {
+		treasure.coins += parseInt(treasureInputs.PP.value)*1000;
+	}
+	if (treasureInputs.GP.value) {
+		treasure.coins += parseInt(treasureInputs.GP.value)*100;
+	}
+	if (treasureInputs.EP.value) {
+		treasure.coins += parseInt(treasureInputs.GP.value)*50;
+	}
+	if (treasureInputs.SP.value) {
+		treasure.coins += parseInt(treasureInputs.SP.value)*10;
+	}
+	if (treasureInputs.CP.value) {
+		treasure.coins += parseInt(treasureInputs.CP.value);
+	}
+	if (treasureInputs.items.value) {
+		const itemString = treasureInputs.items.value;
+		itemArray = itemString.split(", ");
+		treasure.items = treasure.items.concat(itemArray);
+	}
+	storeTreasure();
+	clearTreasureInputs();
+	return showTreasure();
+}
+
+const storeTreasure = () => {
+	//Store treasure in local storage
+	if (typeof(Storage) !== "undefined") {
+		localStorage.setItem("treasure", JSON.stringify(treasure));
+		localStorage.setItem("previousTreasure", JSON.stringify(previousTreasure));
+	} else {
+		throw Error('Sorry! No Web Storage support');
+	}
+}
+
+function showTreasure() {
+	//Display party treasure
+	let message = `${treasure.coins/100} gold pieces<br>`;
+	for (let i = 0; i < treasure.items.length; i++) {
+		if (i > 0) {
+			message += ', ';
+		}
+		message += `${treasure.items[i]}`;
+	};
+	return message;
+}
+
+function divvyItUp() {
+	//Divide up the party's treasure and reset values
+	if (confirm('Are you sure you want to divvy up the gold?')) {
+		let adventurers = prompt('How many adventurers?');
+		while (isNaN(adventurers) || adventurers <= 0) {
+			adventurers = prompt('Please enter a valid number of adventurers')
+		}
+		if (confirm(`You want to divide between ${adventurers} adventurers?`)) {
+			const copperEach = ((treasure.coins)/adventurers);
+			previousTreasure = `${(copperEach/100).toFixed(2)} gold each if divided evenly between ${adventurers}<br>Total Treasure: ${showTreasure()}`
+			treasure = {
+				coins: 0,
+				items: []
+			}
+			storeTreasure();
+			return previousTreasure;
+		} else {
+			return 'Are you keeping all that treasure for yourself, mate?';
+		}
+	}
+}
+
+//Show stored values for last round of treasure
+const showPrevious = () => `This is what you added last time:<br>${previousTreasure}`;
