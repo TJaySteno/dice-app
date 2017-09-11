@@ -18,7 +18,7 @@
 				<input type="text" id="number1"><br>
 				Number of sides:<br>
 				<input type="text" id="sides1"><br>
-				<button onClick="rollButton(); return false;">Roll!</button>
+				<button onClick="print(rollButton()); return false;">Roll!</button>
 			</fieldset>
 			<fieldset>
 				<legend>Secondary damage:</legend>
@@ -28,7 +28,7 @@
 				<input type="text" id="number2"><br>
 				Sides:<br>
 				<input type="text" id="sides2"><br>
-				<button onClick="rollButton(); return false;">Roll!</button>
+				<button onClick="print(rollButton()); return false;">Roll!</button>
 			</fieldset>
 			<fieldset>
 				<legend>Tertiary damage:</legend>
@@ -38,10 +38,23 @@
 				<input type="text" id="number3"><br>
 				Sides:<br>
 				<input type="text" id="sides3"><br>
-				<button onclick="rollButton(); return false;">Roll!</button>
+				<button onclick="print(rollButton()); return false;">Roll!</button>
 			</fieldset>
 		</form>
 		<button id="test" onclick="print(testRolls())">Test</button>
+		<fieldset class="wide">
+			<legend>Party Treasure</legend>
+			PP: <input type="text" class="short" id="PP"> 
+			GP: <input type="text" class="short" id="GP"> 
+			EP: <input type="text" class="short" id="EP"> 
+			SP: <input type="text" class="short" id="SP"> 
+			CP: <input type="text" class="short" id="CP"><br>
+			Items (separate with a comma and space ", "):<br>
+			<input type="text" class="big" id="items"><br>
+			<button onclick="print(addToStash()); return false;">Stash!</button>
+			<button onclick="print(divvyItUp()); return false;">Divvy it up</button>
+			<button onclick="print(showPrevious()); return false;">Show the spoils</button>
+		</fieldset>
 		<h2></h2>
 		<div id="background">
 			<div id="result"></div>

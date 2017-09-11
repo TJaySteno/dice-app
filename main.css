@@ -4,6 +4,23 @@ fieldset {
 	height: 200 px;
 }
 
+h2 {
+	width: 590px;
+	word-wrap: normal;
+}
+
+.wide {
+	width: 590px;
+}
+
+.short {
+	width: 40px;
+}
+
+.big {
+	width: 500px;
+}
+
 #background {
     width:300px;
     height:400px;
