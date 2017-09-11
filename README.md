@@ -6,9 +6,10 @@ This app was created as a tool to use for use with tabletop roleplaying games. I
 
 (Shortsword 1d8 + Sneak Attack 2d6 + Fire Damage 1d6): 15 total ( 3, 3 5, 4 ) - 14:51:48
 
+Party treasure tracking is complete. It converts all coins into gold and displays significant items as well. Update party treasure as often as needed and whenever you need to divide everything up using the app. Finally, the previous round of loot will be stored just in case it needs to be referred to at a later time.
+
 Next steps: 
-	This app has borrowed the HTML and CSS from a free-source calculator app and my next step will be to add functionality to that calculator. 
-	I will be adding a party treasure tracker that will store information about loot found on adventures; everything from gold and silver to significant items. This tracker will store the info in localStorage for later use and it will automatically calculate each person's share.
+	This app has borrowed the HTML and CSS from a free-source calculator app and my next step will be to add functionality to that calculator.
 	Considering making something that automatically rolls attributes
 
 Open issues: 
