@@ -1,189 +1,149 @@
-fieldset {
-	display: inline-block;
-	width: 100px;
-	height: 200 px;
+/* CSS RESET */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+		border-radius: 10px;
+    margin: 0 0 0 5px;
+    outline: 0;
+    vertical-align: top;
+    background: transparent;
 }
 
-h2 {
-	width: 590px;
+/* HALF SCREEN */
+
+body {
+	background-color: #c19469;
+	font-family: 'Merienda', cursive;
+}
+
+h1, legend, button { 
+	font-family: 'Kalam', cursive;
+}
+
+h1 {
+	font-size: 40px;
+}
+
+legend {
+	font-size: 16px;
+}
+
+div {
+	display: block;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	vertical-align: top;
+}
+
+fieldset {
+	background-color: #d2b48c;
+	border: groove 2px #795532;
+	display: inline-block;
+	font-size: 14px;
+	width: 28%;
+	vertical-align: top;
+}
+
+p {
+	background-color: #d2b48c;
+	border: groove 1px #795532;
+	padding: 10px;
+	margin: 0 auto 5px;
+	height: 120px;
+	width: 65%;
 	word-wrap: normal;
 }
 
-.wide {
-	width: 590px;
+input {
+	background-color: transparent;
+	border: solid 1px #795532;
+	border-radius: 3px;
+	width: 100%;
 }
 
-.short {
+input:focus {
+	outline: 0;
+}
+
+button {
+	background-color: #795532;
+	border: outset 3px #795532;
+	border-radius: 5px;
+	font-size: 14px;
+	margin-top: 5px;
+	width: 30%;
+}
+
+button#test {
+	margin: 5px 10px;
+}
+
+button.select {
+	font-size: 13px;
+	height: 25px;
+	width: 20%;
+}
+
+button:active, button:focus, button:hover {
+	outline: 0;
+}
+
+button:active, button:hover {
+	border: inset 3px #795532;
+}
+
+select {
+	background-color: #d2b48c;
+	border: solid 1px #795532;
+	border-radius: 3px;
+	font-size: 14px;
+	width: 30%;
+}
+
+select:active, select:focus, select:hover {
+	outline: 0;
+}
+
+footer {
+	float: right;
+	margin: 40px;
+	margin-bottom: 25px;
+}
+
+.wide {
+	width: 93.5%;
+}
+
+.narrow {
 	width: 40px;
 }
-
-.big {
-	width: 500px;
+	
+.right {
+	background-color: #9d6e41;
+	border: groove 2px #67482b;
+	padding: 10px;
+	width: 95%;
 }
 
-#background {
-    width:300px;
-    height:400px;
-    background:gray;
-}
+/* FULL SCREEN */
 
-#result {
-	display:block;
-	width:230px;
-	height:40px;
-	margin:10px auto;
-	text-align: right;
-	border:0;
-	background:#3b3535;
-	color:#fff;
-	padding-top:20px;
-	font-size:20px;
-	margin-left: 25px;
-	outline: none;
-	overflow: hidden;
-	letter-spacing: 4px;
-	position: relative;
-	top:10px;
-}
+@media screen and (min-width: 1250px) {
+	
+	div {
+		display: inline-block;
+	}
+	
+	.left {
+		width: 55%;
+	}
+	
+	.right {
+		width: 40%;
+	}
 
-#result:hover {
-	cursor: text;
-}
-
-#first-rows {
-	margin-bottom: 20px;
-	position: relative;
-	top:10px;
-}
-
-.rows {
-	width:300px;
-	margin-top:10px;
-}
-
-#delete {
-	width:110px;
-	height:50px;
-	margin-left:25px;
-	border-radius:4px;
-}
-
-/* Aligning the division and dot button properly */
-.fall-back {
-	margin-left:3px !important;
-}
-
-/* Aligning the addition and equals to button properly */
-.align {
-	margin-left: 6px !important;
-}
-
-/* Button styling */
-.btn-style {
-	width:50px;
-	height:50px;
-	margin-left:5px;
-	border-radius:4px;
-}
-
-.eqn {
-	width:50px;
-	height:50px;
-	margin-left:5px;
-	border-radius:4px;
-}
-
-.first-child {
-	margin-left:25px;
-}
-
-
-/* Adding background color to the number values */
- .num-bg {
-    background:#000;
-    color:#fff;
-    font-size:26px;
-    cursor:pointer;
-    outline:none;
-    border-bottom:3px solid #333;
-}
-
- .num-bg:active {
-    background:#000;
-    color:#fff;
-    font-size:26px;
-    cursor:pointer;
-    outline:none;
-    box-shadow: inset 5px 5px 5px #555;
-}
-
-/*Adding background color to the operator values */ 
-.opera-bg {
-    background:#333;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    border-bottom:3px solid #555;
-}
-
-.opera-bg:active {
-    background:#333;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    box-shadow: inset 4px 4px 4px #555;
-}
-
-/*Adding a background color to the delete button */
-.del-bg {
-    background:#24b4de;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    border-bottom:3px solid #399cb9;
-}
-
-.del-bg:active {
-    background:#24b4de;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    box-shadow: inset 4px 4px 4px #399cb9;
-}
-
-/*Adding a background color to the equals to button */
-#eqn-bg {
-    background:#17a928;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    border-bottom:3px solid #1f7a29;
-}
-
-#eqn-bg:active {
-    background:#17a928;
-    color:#fff;
-    font-size:26px;
-    cursor: pointer;
-    outline:none;
-    box-shadow: inset 4px 4px 4px #1f7a29;
-}
-
-@-webkit-keyframes bgChange {
-    0% {
-       background:#24b4de; 
-    }
-    
-    50% {
-      background:#17a928;
-    }
-    
-    100% {
-        background:#399cb9;
-    }
+	footer {
+		margin-top: 20px;
+		margin-right: 100px;
+	}
+	
 }
