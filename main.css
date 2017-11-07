@@ -44,7 +44,7 @@ fieldset {
 	vertical-align: top;
 }
 
-p {
+p.display {
 	background-color: #d2b48c;
 	border: groove 1px #795532;
 	padding: 10px;
@@ -110,10 +110,6 @@ footer {
 	margin-bottom: 25px;
 }
 
-.wide {
-	width: 93.5%;
-}
-
 .narrow {
 	width: 40px;
 }
@@ -123,6 +119,10 @@ footer {
 	border: groove 2px #67482b;
 	padding: 10px;
 	width: 95%;
+}
+
+.wide {
+	width: 93.5%;
 }
 
 /* FULL SCREEN */

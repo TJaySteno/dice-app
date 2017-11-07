@@ -1,63 +1,89 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Cya nerds!</title>
+		<title>Player Character App</title>
 		<meta charset="UTF-8">
+		<link href="https://fonts.googleapis.com/css?family=Kalam:700|Merienda" rel="stylesheet">
 		<link rel="stylesheet" href="main.css">
 	</head>
 	<header>
-		<h1>D&D Dice!</h1>
+		<h1>D&amp;D Player Character App!</h1>
 	</header>
 	<body>
-		<fieldset>
-			<legend>Roll information:</legend>
-			Action:<br>
-			<input type="text" id="action1"><br>
-			Number of dice:<br>
-			<input type="text" id="number1"><br>
-			Number of sides:<br>
-			<input type="text" id="sides1"><br>
-			<button>Roll!</button>
-		</fieldset>
-		<fieldset>
-			<legend>Secondary damage:</legend>
-			Damage source:<br>
-			<input type="text" id="action2"><br>
-			Number of dice:<br>
-			<input type="text" id="number2"><br>
-			Number of sides:<br>
-			<input type="text" id="sides2"><br>
-			<button>Roll!</button>
-		</fieldset>
-		<fieldset>
-			<legend>Tertiary damage:</legend>
-			Damage source:<br>
-			<input type="text" id="action3"><br>
-			Number of dice:<br>
-			<input type="text" id="number3"><br>
-			Number of sides:<br>
-			<input type="text" id="sides3"><br>
-			<button>Roll!</button>
-		</fieldset>
-		<fieldset class="wide">
-			<legend>Party Treasure</legend>
-			PP: <input type="text" class="short" id="PP"> 
-			GP: <input type="text" class="short" id="GP"> 
-			EP: <input type="text" class="short" id="EP"> 
-			SP: <input type="text" class="short" id="SP"> 
-			CP: <input type="text" class="short" id="CP"><br>
-			Items (separate with a comma and space ", "):<br>
-			<input type="text" class="big" id="items"><br>
-			<button id="stash">Stash!</button>
-			<button id="divvy">Divvy it up</button>
-			<button id="spoils">Show the spoils</button>
-		</fieldset><br>
-		<button id="test">Test</button>
-		<h2></h2>
-		<script src="htmlElements.js"></script>
-		<script src="app.js"></script>
+		<div class="left">
+			<fieldset>
+				<legend>Roll information</legend>
+				Action:<br>
+				<input type="text" id="action1"><br>
+				Number of dice:<br>
+				<input type="text" id="number1"><br>
+				Number of sides:<br>
+				<input type="text" id="sides1"><br>
+				<button>Roll!</button>
+			</fieldset>
+			<fieldset>
+				<legend>Secondary damage</legend>
+				Damage source:<br>
+				<input type="text" id="action2"><br>
+				Number of dice:<br>
+				<input type="text" id="number2"><br>
+				Number of sides:<br>
+				<input type="text" id="sides2"><br>
+				<button>Roll!</button>
+			</fieldset>
+			<fieldset>
+				<legend>Tertiary damage</legend>
+				Damage source:<br>
+				<input type="text" id="action3"><br>
+				Number of dice:<br>
+				<input type="text" id="number3"><br>
+				Number of sides:<br>
+				<input type="text" id="sides3"><br>
+				<button>Roll!</button>
+			</fieldset><br>
+			<button id="test">Test</button>
+			<p class="display"></p>
+		</div>
+		<div class="right">
+			<fieldset class="wide">
+				<legend>Party Treasure</legend>
+				PP: <input type="text" class="narrow" id="PP"> 
+				GP: <input type="text" class="narrow" id="GP"> 
+				EP: <input type="text" class="narrow" id="EP"> 
+				SP: <input type="text" class="narrow" id="SP"> 
+				CP: <input type="text" class="narrow" id="CP"><br>
+				Items (separate with a comma and space ", "):<br>
+				<input type="text" class="big" id="items"><br>
+				<button id="stash">Stash!</button>
+				<button id="divvy">Divvy it up</button>
+				<button id="spoils">Show the spoils</button>
+			</fieldset><br>
+			<div class="trash-talk">
+				<fieldset class="wide">
+					<legend>Trash Talk</legend>
+					Give me something to call a
+						<select name="race">
+							<option></option>
+							<option value="dragonborn">Dragonborn</option>
+							<option value="drow">Drow</option>
+							<option value="dwarf">Dwarf</option>
+							<option value="elf">Elf</option>
+							<option value="gnome">Gnome</option>
+							<option value="halfelf">Half-Elf</option>
+							<option value="halfling">Halfling</option>
+							<option value="halforc">Half-Orc</option>
+							<option value="human">Human</option>
+							<option value="orc">Orc</option>
+						</select>
+					<button class="select">Hit me!</button>
+				</fieldset>
+			</div>
+		</div>
 	</body>
 	<footer>
-		Trent's little thing! &copy;2017
+		 &copy;2017 Trent Stenoien
 	</footer>
+	<script src="../data/data.js"></script>
+	<script src="htmlElements.js"></script>
+	<script src="app.js"></script>
 </html>

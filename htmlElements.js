@@ -1,17 +1,26 @@
 //HTML elements
-//Roll information
-const rollInfoElements = Array.from(document.querySelectorAll('fieldset'));
+	//Left div
+		//Roll information
+const left = document.querySelector('.left');
+const leftFieldsets = left.querySelectorAll('fieldset');
 const rollInputs = [{},{},{}];
 const rollButtons = [];
-for (let i = 0; i < rollInfoElements.length-1; i++) {
-	rollInputs[i].actionElement = rollInfoElements[i].firstElementChild.nextElementSibling.nextElementSibling;
+for (let i = 0; i < 3; i++) {
+	rollInputs[i].actionElement = leftFieldsets[i].firstElementChild.nextElementSibling.nextElementSibling;
 	rollInputs[i].numberOfDiceElement = rollInputs[i].actionElement.nextElementSibling.nextElementSibling.nextElementSibling;
 	rollInputs[i].dieSidesElement = rollInputs[i].numberOfDiceElement.nextElementSibling.nextElementSibling.nextElementSibling;
 	rollButtons.push(rollInputs[i].dieSidesElement.nextElementSibling.nextElementSibling);
 }
 
-//Party Treasure
-const partyTreasure = rollInfoElements.pop();
+		//Test and h2
+const display = left.lastElementChild;
+const test = display.previousElementSibling;
+
+
+	//Right Div
+		//Party Treasure
+const right = document.querySelector('.right');
+const partyTreasure = right.firstElementChild;
 const treasureInputs = {};
 	treasureInputs.PP = partyTreasure.firstElementChild.nextElementSibling;
 	treasureInputs.GP = treasureInputs.PP.nextElementSibling;
@@ -23,29 +32,31 @@ const spoils = partyTreasure.lastElementChild;
 const divvy = spoils.previousElementSibling;
 const stash = divvy.previousElementSibling;
 
-//Test and h2
-const test = partyTreasure.nextElementSibling.nextElementSibling;
-const h2 = test.nextElementSibling;
+		//Trash Talk
+const trashTalk = right.lastElementChild.firstElementChild;
+const trash = trashTalk.lastElementChild;
+const trashTalkSelect = trash.previousElementSibling;
 
 
 //Event listeners
-//Roll Information
+	//Left div
+		//Roll Information
 for (let i = 0; i < rollButtons.length; i++) { 
 	rollButtons[i].addEventListener( 'click', () => print(rollButton()) );
 };
+test.addEventListener('click', () => { print(testRolls()) });
 
-//Party Treasure and Test
+	//Right div
+		//Party Treasure and Test
 stash.addEventListener('click', () => { print(addToStash()); });
 divvy.addEventListener('click', () => { print(divvyItUp()); });
 spoils.addEventListener('click', () => { print(showPrevious()); });
-test.addEventListener('click', () => { print(testRolls()) });
+trash.addEventListener('click', () => { print(getTrashTalk()); });
 
 
 //HTML functions
-//Print function
-function print (message) { h2.innerHTML = message; }
-
-//Clear Roll Information
+	//Left div
+		//Clear Roll Information
 function clearRollInputs () {
 	rollInputs[0].actionElement.value = '';
 	rollInputs[0].numberOfDiceElement.value = '1';
@@ -58,7 +69,11 @@ function clearRollInputs () {
 	rollInputs[0].actionElement.focus();
 }
 
-//Clear Party Treasure
+		//Print function
+function print (message) { display.innerHTML = message; }
+
+	//Right div
+		//Clear Party Treasure
 function clearTreasureInputs () {
 	treasureInputs.PP.value = '';
 	treasureInputs.GP.value = '';
@@ -67,6 +82,7 @@ function clearTreasureInputs () {
 	treasureInputs.CP.value = '';
 	treasureInputs.items.value = '';
 }
+
 
 //Set initial state
 clearRollInputs();

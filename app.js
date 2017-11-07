@@ -71,7 +71,10 @@ function rollMessage (rollInfo) {
 	let total = 0;
 	let theRolls = ' total (';
 	for (let j = 0; j < rollInfo.length; j++) {
-		description += `${rollInfo[j].action} ${rollInfo[j].numberOfDice}d${rollInfo[j].dieSides}`;
+		if (rollInfo[j].action) {
+			description += `${rollInfo[j].action} `;
+		}
+		description += `${rollInfo[j].numberOfDice}d${rollInfo[j].dieSides}`;
 		for (let i = 0; i < rollInfo[j].rolls.length; i++) {
 			total += rollInfo[j].rolls[i];
 			theRolls += ` ${rollInfo[j].rolls[i]}`;
@@ -93,10 +96,11 @@ function allRollsMessage (newRoll) {
 	if (previousRolls.length > 5) {
 		previousRolls.pop();
 	}
-	message = '';
+	message = '<ol>';
 	for (let i = 0; i < previousRolls.length; i++) {
-		message += `${previousRolls[i]}<br>`;
+		message += `<li>${previousRolls[i]}</li>`;
 	}
+	message += '</ol>';
 	return message;
 }
 
@@ -169,7 +173,7 @@ function storeTreasure () {
 
 //Display party treasure
 function showTreasure () {
-	let message = `${treasure.coins/100} gold pieces<br>`;
+	let message = `<b>${treasure.coins/100} gold pieces</b><br>`;
 	for (let i = 0; i < treasure.items.length; i++) {
 		if (i > 0) {
 			message += ', ';
@@ -188,7 +192,7 @@ function divvyItUp () {
 		}
 		if (confirm(`You want to divide between ${adventurers} adventurers?`)) {
 			const copperEach = ((treasure.coins)/adventurers);
-			previousTreasure = `${(copperEach/100).toFixed(2)} gold each if divided evenly between ${adventurers}<br>Total Treasure: ${showTreasure()}`
+			previousTreasure = `<b>${(copperEach/100).toFixed(2)} gold each</b> if divided evenly between ${adventurers}<li>Total Treasure: ${showTreasure()}</li>`
 			treasure = {
 				coins: 0,
 				items: []
@@ -203,7 +207,7 @@ function divvyItUp () {
 }
 
 //Show stored values for last round of treasure
-const showPrevious = () => `This is what you added last time:<br>${previousTreasure}`;
+const showPrevious = () => `<b>This is what you added last time:</b><li>${previousTreasure}</li>`;
 
 
 //Test Button
@@ -218,7 +222,7 @@ function testRolls () {
 		list.push(num);
 		filtered[num-1].push(num);
 	};
-	return `Test results for 9,999 rolls<p>${mean(sum, 9999).toFixed(4)} mean<br>${median(list)} median<br>${mode(filtered)}</p>`;
+	return `<b>Test results for 9,999 rolls</b><br><ul><li>${mean(sum, 9999).toFixed(4)} mean</li><li>${median(list)} median</li><li>${mode(filtered)}</li>`;
 }
 
 function mean (sum, length) { return (sum/length); };
@@ -248,6 +252,34 @@ function mode (filtered) {
 	return message;
 }
 
+
+//Trash Talk
+function getTrashTalk () {
+	const input = trashTalkSelect.value.toUpperCase();
+	let raceData = data[input];
+	let message = '<ul>';
+	let prompt;
+	if (input === 'HALFELF' || input === 'HALFORC') {
+		const subrace = input[4]+input[5]+input[6];
+		do {
+			prompt = window.prompt(`Are you a 'human', an '${subrace.toLowerCase()}', or 'neither'? Just enter the first letter.`).toUpperCase();
+		} while ( prompt !== 'H' && prompt !== subrace[0] && prompt !== 'N' && 
+							prompt !== 'HUMAN' && prompt !== subrace && prompt !== 'NEITHER' );
+		if (prompt != subrace[0] && prompt != subrace) {
+			raceData = raceData.concat(data[subrace]);
+		} else if (prompt != 'H' && prompt != 'HUMAN') {
+			raceData = raceData.concat(data['HUMAN']);
+		}
+	}
+	const length = raceData.length;
+	for (let i = 0; i < 5; i++) {
+		let random = d(length)-1;
+		message += `<li>${raceData[random]}</li>`;
+	}
+	message += '</ul>';
+	return message;
+}
+
 //Error handler
 function handler (err) {
 	console.log(err);
@@ -255,40 +287,3 @@ function handler (err) {
 	if (err.status) { message += `Status: ${err.status}` };
 	return message;
 }
-
-
-/* 
-		<div id="background">
-			<div id="result"></div>
-			<div id="main">
-				<div id="first-rows">
-					<button class="del-bg" id="delete">C</button>
-						<button value="%" class="btn-style operator opera-bg fall-back">%</button>
-						<button value="+" class="btn-style opera-bg value align operator">+</button>
-				</div>
-				<div class="rows">
-					<button value="7" class="btn-style num-bg num first-child">7</button>
-					<button value="8" class="btn-style num-bg num">8</button>
-					<button value="9" class="btn-style num-bg num">9</button>
-					<button value="-" class="btn-style opera-bg operator">-</button>
-				</div>
-				<div class="rows">
-					<button value="4" class="btn-style num-bg num first-child">4</button>
-					<button value="5" class="btn-style num-bg num">5</button>
-					<button value="6" class="btn-style num-bg num">6</button>
-					<button value="*" class="btn-style opera-bg operator">x</button>
-				</div> 
-				<div class="rows">
-					 <button value="1" class="btn-style num-bg num first-child">1</button>
-					 <button value="2" class="btn-style num-bg num">2</button>
-					 <button value="3" class="btn-style num-bg num">3</button>
-					 <button value="/" class="btn-style opera-bg operator">/</button>
-				</div>
-				<div class="rows">
-					 <button value="0" class="num-bg zero" id="delete">0</button>
-					 <button value="." class="btn-style num-bg period fall-back">.</button>
-					 <button value="=" id="eqn-bg" class="eqn align">=</button>
-				</div>
-			</div>
-		</div>
- */
