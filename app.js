@@ -252,34 +252,6 @@ function mode (filtered) {
 	return message;
 }
 
-
-//Trash Talk
-function getTrashTalk () {
-	const input = trashTalkSelect.value.toUpperCase();
-	let raceData = data[input];
-	let message = '<ul>';
-	let prompt;
-	if (input === 'HALFELF' || input === 'HALFORC') {
-		const subrace = input[4]+input[5]+input[6];
-		do {
-			prompt = window.prompt(`Are you a 'human', an '${subrace.toLowerCase()}', or 'neither'? Just enter the first letter.`).toUpperCase();
-		} while ( prompt !== 'H' && prompt !== subrace[0] && prompt !== 'N' && 
-							prompt !== 'HUMAN' && prompt !== subrace && prompt !== 'NEITHER' );
-		if (prompt != subrace[0] && prompt != subrace) {
-			raceData = raceData.concat(data[subrace]);
-		} else if (prompt != 'H' && prompt != 'HUMAN') {
-			raceData = raceData.concat(data['HUMAN']);
-		}
-	}
-	const length = raceData.length;
-	for (let i = 0; i < 5; i++) {
-		let random = d(length)-1;
-		message += `<li>${raceData[random]}</li>`;
-	}
-	message += '</ul>';
-	return message;
-}
-
 //Error handler
 function handler (err) {
 	console.log(err);

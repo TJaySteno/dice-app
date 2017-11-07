@@ -32,11 +32,6 @@ const spoils = partyTreasure.lastElementChild;
 const divvy = spoils.previousElementSibling;
 const stash = divvy.previousElementSibling;
 
-		//Trash Talk
-const trashTalk = right.lastElementChild.firstElementChild;
-const trash = trashTalk.lastElementChild;
-const trashTalkSelect = trash.previousElementSibling;
-
 
 //Event listeners
 	//Left div
@@ -51,7 +46,6 @@ test.addEventListener('click', () => { print(testRolls()) });
 stash.addEventListener('click', () => { print(addToStash()); });
 divvy.addEventListener('click', () => { print(divvyItUp()); });
 spoils.addEventListener('click', () => { print(showPrevious()); });
-trash.addEventListener('click', () => { print(getTrashTalk()); });
 
 
 //HTML functions

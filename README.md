@@ -9,9 +9,9 @@
 
 ## Party Treasure
     Party treasure tracking is complete. It converts all coins into gold and displays significant items as well. Update party treasure as often as needed and whenever you need to divide everything up using the app. Finally, the previous round of loot will be stored just in case it needs to be referred to at a later time.
-
-## Trash Talk
-    I took some online lists of trash talk terms and developed a tool that generates 5 colorful terms for those PCs that want to add a little more flavor to their speech.
+		
+## Test Function
+    A feature for those, like me, that question just how random this dice app is. It rolls 9,999 20-sided dice, calculates the mean, median, and mode, and displays it for the user.
 
 ## Next steps:
 	  Change dice tool to input box with buttons for common numbers for easier use
